@@ -1,0 +1,324 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11626,        316]
+NotebookOptionsPosition[      9949,        278]
+NotebookOutlinePosition[     10346,        294]
+CellTagsIndexPosition[     10303,        291]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], " "}]], "Input",\
+
+ CellLabel->
+  "(Debug) In[1367]:=",ExpressionUUID->"b340011c-9c96-4778-b026-38ffbb959a67"],
+
+Cell[CellGroupData[{
+
+Cell["Generation of the output signal", "Section",
+ CellChangeTimes->{{3.873925114259303*^9, 
+  3.8739251425327873`*^9}},ExpressionUUID->"bef85162-2c5e-43ef-ada5-\
+6241a0dfffad"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eps", "=", "0.0000000000001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frq", "=", "127"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"srate", "=", "4100."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"duration", "=", "100"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"signal", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Sin", "[", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"(", 
+         RowBox[{"frq", "*", "2.", "*", "\[Pi]"}], ")"}], "srate"], "*", 
+       "#"}], "]"}], "&"}], "/@", 
+    RowBox[{"Range", "[", 
+     RowBox[{"1", ",", 
+      RowBox[{"srate", "*", "duration"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"asignal", "=", 
+   RowBox[{"Audio", "[", 
+    RowBox[{"signal", ",", 
+     RowBox[{"SampleRate", "\[Rule]", "srate"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"AudioPlot", "[", "asignal", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8739082596954536`*^9, 3.873908371367626*^9}, {
+   3.873908461809581*^9, 3.873908535848357*^9}, {3.873908594990871*^9, 
+   3.873908623998209*^9}, {3.873908694173319*^9, 3.873908811709074*^9}, 
+   3.873909935425653*^9, {3.873909971638864*^9, 3.8739099797404137`*^9}, {
+   3.873910228575482*^9, 3.873910228771139*^9}, {3.873910472111288*^9, 
+   3.873910473352922*^9}, {3.873910606504777*^9, 3.873910609200789*^9}, 
+   3.8739122043991613`*^9, {3.87391482393587*^9, 3.8739148308784647`*^9}, {
+   3.873918848160309*^9, 3.873918848513988*^9}, {3.87391888922044*^9, 
+   3.873918894193904*^9}, {3.873920436407611*^9, 3.8739204368511333`*^9}, 
+   3.87392078609079*^9, 3.873920836087583*^9, {3.873921057243984*^9, 
+   3.873921066525218*^9}, {3.873921155720565*^9, 3.873921156105888*^9}, {
+   3.873921192776058*^9, 3.873921197542794*^9}, 3.873921547875567*^9, {
+   3.87392160345851*^9, 3.8739216041018476`*^9}, 3.873921724945416*^9, 
+   3.873925096917964*^9, {3.87392515517032*^9, 3.8739251775499277`*^9}, {
+   3.873925270278358*^9, 3.873925295492917*^9}, {3.873925865682529*^9, 
+   3.873925866959467*^9}, {3.8739269403468*^9, 3.873926940921763*^9}},
+ CellLabel->
+  "(Debug) In[1383]:=",ExpressionUUID->"dbdbd71c-c381-4ea1-86ef-907b6d5c27bf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Creating audio streams for playing and recording", "Section",
+ CellChangeTimes->{{3.873925203527747*^9, 
+  3.873925226363687*^9}},ExpressionUUID->"241dac50-156c-4ac5-a6e0-\
+c43922a3d1a2"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"astreamPlay", "=", 
+   RowBox[{"AudioStream", "[", "asignal", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"astreamRec", "=", 
+   RowBox[{"AudioStream", "[", 
+    RowBox[{"$DefaultAudioInputDevice", ",", 
+     RowBox[{"SampleRate", "\[Rule]", "4100"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"astreamPlay", "[", "\"\<BufferSize\>\"", "]"}], "=", "400"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"astreamRec", "[", "\"\<BufferSize\>\"", "]"}], "=", "400"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.873926439697995*^9, 3.873926456146948*^9}, {
+  3.873926518563489*^9, 3.873926518789056*^9}, {3.873926796434784*^9, 
+  3.87392679877724*^9}},
+ CellLabel->
+  "(Debug) In[1390]:=",ExpressionUUID->"169e71ef-4e13-4b4d-8307-edd9311c6774"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Plot and show phase (degree) dynamically while streams are running \
+\>", "Section",
+ CellChangeTimes->{{3.87392541552514*^9, 3.87392543513455*^9}, {
+  3.8739255171388397`*^9, 
+  3.873925598548687*^9}},ExpressionUUID->"5a0a581b-3d83-43e2-ab8b-\
+9552880ec945"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"phasexy", "=", 
+    RowBox[{
+     FractionBox["1.", "Degree"], "*", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"ArcTan", "[", 
+        RowBox[{
+         RowBox[{"eps", "+", 
+          RowBox[{
+           RowBox[{"AudioData", "[", 
+            RowBox[{"Audio", "[", 
+             RowBox[{"astreamPlay", "[", "\"\<CurrentAudio\>\"", "]"}], "]"}],
+             "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"UnitConvert", "[", 
+            RowBox[{
+             RowBox[{"astreamPlay", "[", "\"\<Position\>\"", "]"}], ",", 
+             "\"\<Seconds\>\""}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", "eps"}]}], "]"}], "-", 
+       RowBox[{"ArcTan", "[", 
+        RowBox[{
+         RowBox[{"eps", "+", 
+          RowBox[{
+           RowBox[{"AudioData", "[", 
+            RowBox[{"Audio", "[", 
+             RowBox[{"astreamRec", "[", "\"\<CurrentAudio\>\"", "]"}], "]"}], 
+            "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"UnitConvert", "[", 
+            RowBox[{
+             RowBox[{"astreamRec", "[", "\"\<Position\>\"", "]"}], ",", 
+             "\"\<Seconds\>\""}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", "eps"}]}], "]"}]}], ")"}]}]}],
+    ";", "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"ListPlot", "[", 
+       RowBox[{
+        RowBox[{"phasexy", "*", "1.0"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            FractionBox[
+             RowBox[{"-", "1."}], 
+             RowBox[{"2.", "Degree"}]], " ", "\[Pi]"}], ",", 
+           RowBox[{
+            FractionBox["1.", 
+             RowBox[{"2.", "Degree"}]], "\[Pi]"}]}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}], ",", 
+      "\"\<    \>\"", ",", 
+      RowBox[{
+       RowBox[{"RootMeanSquare", "[", 
+        RowBox[{"phasexy", "*", "1.0"}], "]"}], "*", "1.0"}]}], "}"}], 
+    "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.873925709718897*^9, 3.873925712174181*^9}, {
+   3.873925832112421*^9, 3.873925837478424*^9}, {3.873925992217573*^9, 
+   3.8739260073987513`*^9}, {3.873926136088521*^9, 3.873926149735434*^9}, 
+   3.873926684070888*^9, {3.8739267213067827`*^9, 3.8739267612621202`*^9}},
+ CellLabel->
+  "(Debug) In[1396]:=",ExpressionUUID->"c32eb111-7525-40b6-ac11-d0c10e301634"],
+
+Cell[BoxData[
+ DynamicBox[
+  ToBoxes[$CellContext`phasexy = (1./Degree) (ArcTan[$CellContext`eps + Part[
+          AudioData[
+           Audio[
+            $CellContext`astreamPlay["CurrentAudio"]]], 1], Part[
+          UnitConvert[
+           $CellContext`astreamPlay["Position"], "Seconds"], 
+          1] + $CellContext`eps] - ArcTan[$CellContext`eps + Part[
+         AudioData[
+          Audio[
+           $CellContext`astreamRec["CurrentAudio"]]], 1], Part[
+         UnitConvert[
+          $CellContext`astreamRec["Position"], "Seconds"], 
+         1] + $CellContext`eps]); Row[{
+      ListPlot[$CellContext`phasexy 1., 
+       PlotRange -> {((-1.)/(2. Degree)) Pi, (1./(2. Degree)) Pi}, ImageSize -> 
+       Medium], "    ", RootMeanSquare[$CellContext`phasexy 1.] 1.}], 
+   StandardForm],
+  ImageSizeCache->{446., {105., 110.}}]], "Output",
+ CellChangeTimes->{3.873926959899946*^9},
+ CellLabel->
+  "(Debug) Out[1396]=",ExpressionUUID->"3ec7f3a8-b7ca-43e9-8822-b1ab4fe95985"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8739262360546627`*^9, 3.873926253622884*^9}, 
+   3.873926537937127*^9},
+ CellLabel->
+  "(Debug) In[1364]:=",ExpressionUUID->"fdcdd973-4fb7-4ef4-b485-79d7f7c76ceb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Run the streams", "Section",
+ CellChangeTimes->{{3.873925615555566*^9, 
+  3.8739256190165377`*^9}},ExpressionUUID->"1cef0124-19d8-4d56-b78d-\
+95dc858fc951"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"AudioRecord", "[", 
+   RowBox[{"astreamRec", ",", 
+    RowBox[{"MaxDuration", "\[Rule]", 
+     RowBox[{
+      RowBox[{"UnitConvert", "[", 
+       RowBox[{
+        RowBox[{"Duration", "[", "asignal", "]"}], ",", "\"\<Seconds\>\""}], 
+       "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"AudioPlay", "[", "astreamPlay", "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.873920337935721*^9, 3.873920338993865*^9}, {
+   3.87392080915172*^9, 3.873920810934793*^9}, {3.873921187277721*^9, 
+   3.8739212147462*^9}, {3.8739213969117727`*^9, 3.87392139760238*^9}, 
+   3.8739263594165697`*^9, 3.873926694528838*^9},
+ CellLabel->
+  "(Debug) In[1394]:=",ExpressionUUID->"b71bab92-4719-40ee-b804-e0f5728f7003"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+To stop all streams in case they must be terminated before pre-determined \
+duration\
+\>", "Section",
+ CellChangeTimes->{{3.8739256314937773`*^9, 
+  3.8739256835085363`*^9}},ExpressionUUID->"e7ad4f42-8550-48e5-863b-\
+5a31c0570c00"],
+
+Cell[BoxData[
+ RowBox[{"AudioStop", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.8739211353461037`*^9, 3.873921139956354*^9}},
+ CellLabel->
+  "(Debug) In[1347]:=",ExpressionUUID->"154e049a-7925-478a-b288-236cc035fc1d"]
+}, Open  ]]
+},
+WindowSize->{1113, 812},
+WindowMargins->{{161, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bceb59b4-0ca8-4f4b-8f9a-6de9792521ea"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 207, 6, 41, "Input",ExpressionUUID->"b340011c-9c96-4778-b026-38ffbb959a67"],
+Cell[CellGroupData[{
+Cell[790, 30, 178, 3, 67, "Section",ExpressionUUID->"bef85162-2c5e-43ef-ada5-6241a0dfffad"],
+Cell[971, 35, 2228, 48, 190, "Input",ExpressionUUID->"dbdbd71c-c381-4ea1-86ef-907b6d5c27bf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3236, 88, 193, 3, 67, "Section",ExpressionUUID->"241dac50-156c-4ac5-a6e0-c43922a3d1a2"],
+Cell[3432, 93, 850, 23, 105, "Input",ExpressionUUID->"169e71ef-4e13-4b4d-8307-edd9311c6774"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4319, 121, 269, 6, 67, "Section",ExpressionUUID->"5a0a581b-3d83-43e2-ab8b-9552880ec945"],
+Cell[CellGroupData[{
+Cell[4613, 131, 2611, 68, 254, "Input",ExpressionUUID->"c32eb111-7525-40b6-ac11-d0c10e301634"],
+Cell[7227, 201, 981, 22, 268, "Output",ExpressionUUID->"3ec7f3a8-b7ca-43e9-8822-b1ab4fe95985"]
+}, Open  ]],
+Cell[8223, 226, 212, 4, 41, "Input",ExpressionUUID->"fdcdd973-4fb7-4ef4-b485-79d7f7c76ceb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8472, 235, 162, 3, 67, "Section",ExpressionUUID->"1cef0124-19d8-4d56-b78d-95dc858fc951"],
+Cell[8637, 240, 798, 18, 63, "Input",ExpressionUUID->"b71bab92-4719-40ee-b804-e0f5728f7003"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9472, 263, 241, 6, 67, "Section",ExpressionUUID->"e7ad4f42-8550-48e5-863b-5a31c0570c00"],
+Cell[9716, 271, 217, 4, 41, "Input",ExpressionUUID->"154e049a-7925-478a-b288-236cc035fc1d"]
+}, Open  ]]
+}
+]
+*)
+
